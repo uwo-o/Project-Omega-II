@@ -16,9 +16,15 @@ config=dict()
 
 class Aplication:
     def __init__(self,master=None):
+
+        #I create utils
+
         self.total_sell_cash=0
         self.to_sell=[]
         self.sell={}
+
+        #and i call this metod to create the work space
+
         self.create_widgets()
 
     def create_widgets(self):
@@ -27,7 +33,10 @@ class Aplication:
         '''================================================================='''
         '''                             INTERFACE                           '''
         '''================================================================='''
+        
+        #Interface widgets creation.
 
+        #its to search values in a list
 
         self.search_var=StringVar()
         self.search_var.trace("w",self.update_products_list)
@@ -35,7 +44,12 @@ class Aplication:
         self.products_quantity=StringVar()
 
         self.total=StringVar()
+
+        #Starts total cost entry in 0
+
         self.total.set(str(self.total_sell_cash))
+
+        #I load the enterprise name
 
         Label(text=config["ENTERPRISE_NAME"],font=font_title).pack(pady=10)
 
@@ -73,6 +87,7 @@ class Aplication:
         self.total_entry=Entry(self.frame_table_to_sell,textvariable=self.total,state=DISABLED)
         self.total_entry.grid(row=5,column=6,padx=10)
 
+        #Here i create the table when the products to sell appears.
 
         self.table=ttk.Treeview(self.frame_table_to_sell)
         self.table.grid(row=1,column=0,columnspan=7,padx=10)
@@ -98,11 +113,15 @@ class Aplication:
 
         self.cancel_button=Button(root,width=25,height=5,text="Cancelar",command=self.cancel).place(relx=.4,rely=.85)
         self.sell_button=Button(root,width=25,height=5,text="Generar Venta",command=self.create_sell).place(relx=.7,rely=.85)
+        
+        #and update the table
 
         self.update_products_list()
 
-
     def cancel(self):
+
+        #this clean the variables, and reestart to 0 the hud
+
         self.search_var.set("")
         self.products_quantity.set("")
         self.total_sell_cash=0
@@ -113,51 +132,113 @@ class Aplication:
             self.table.delete(item)    
 
     def create_sell(self):
+
+        #I create a petition to sell
+
         self.sell={}
         exit=0
+
+        #I obtain the id of the row in the table
+
         for x in self.table.get_children():
+
+            #I revise value per value if this product is repeteated and plus them
+
             data=self.table.item(x)['values']
             if data[1] not in self.sell:
                 self.sell[data[1]]=0
             self.sell[data[1]]+=data[3]
         
+        #i comprobe the products stock
+
         for x in Data_base().get_inventary():
             if x[1] in self.sell:
+
+                #If the result between the number of products and his stock is negative, we need more stock for x product
+
                 if int(int(x[2])-self.sell[x[1]])<0:
                     messagebox.showerror("ERROR","El producto {} tiene stock insuficiente, cantidad: {}.".format(x[1],x[2]))
+
+                    #exit flags is activated
+
                     exit=1
                     break
         if exit:
             pass
+
         else:
+            
+            #call to confirm sell class
+
             Confirm_sell(self.sell,self.total_entry.get())
+
+            #clean entry's
+
             self.cancel()
 
-
     def add_to_pre_sell(self):
+
+        #i call to database to obtain the product data about the entry
+
         data=Data_base().get_product(self.search_var.get())
+
+        #I create this list to have the count of elements quantity
+
         self.to_sell.append((data[0][0],int(self.products_quantity.get())))
+
+        #i plus the cost to have the final cost
+
         self.total_sell_cash+=int(data[0][3])*int(self.products_quantity.get())
+
+        #i insert the values in the table
+
         self.table.insert(parent='',index=0, values=(data[0][0],data[0][1],data[0][3],self.products_quantity.get(),int(data[0][3])*int(self.products_quantity.get())))
+
+        #i set the final price
+
         self.total.set(str(self.total_sell_cash))
+
+        #i clean the variables
+
         self.search_var.set("")
         self.products_quantity.set("")
 
     def selected_list(self, *args):
+
+        #this function is needed to get the values from a selected var in a list, doing double click
+
         self.search_var.set(self.products_list.selection_get())
     
     def update_products_list(self, *args):
+
+        #This finction is to find the similar characters in a list
+
+        #I load the shearch data
+
         search=self.search_var.get()
 
+        #Match list
+    
         products_list=[]
+        
+        #All inventary
 
         list=Data_base().get_inventary()
+
+        #add al values to list
+
         for x in list:
             products_list.append(x[1])
 
+        #sort list
+
         products_list.sort()
         
+        #clean the text
+
         self.products_list.delete(0, END)
+
+        #add match elements in to a list, if its is empty, add all elements
 
         for item in products_list:
             if search.lower() in item.lower():
@@ -166,11 +247,15 @@ class Aplication:
 class Confirm_sell:
     def __init__(self,list,cost):
 
+        #start the variables
+
         self.list=list
         self.cost=cost
 
         self.cost_var=StringVar()
         
+        #create a mini windows
+
         self.root=Tk()
         self.root.geometry("250x130")
         self.root.resizable(height=0,width=0)
@@ -179,9 +264,14 @@ class Confirm_sell:
         self.main_frame=Frame(self.root)
         self.main_frame.pack()
 
+        #i call the metod to create the work space
+
         self.widgets()
 
     def widgets(self):
+
+        #Interface
+
         Label(self.main_frame,text="Costo total:").pack()
         self.total_cost_entry=Entry(self.main_frame,textvariable=self.cost_var)
         self.total_cost_entry.insert(END,str(self.cost))
@@ -194,8 +284,14 @@ class Confirm_sell:
         Button(self.main_frame,text="Aceptar",command=self.cash_back_calculator).pack(pady=10)
 
     def cash_back_calculator(self):
+
+        #send a message with the cashback calculed, if the joined value is empty automatically is seted to total value
+
         messagebox.showinfo("VUELTO", "El vuelto es de: ${}.".format(int(self.pay_entry.get())-int(self.cost)))
         Data_base().sell(self.list)
+
+        #destroy itself
+
         self.root.destroy()
 
 class Data_base:
@@ -429,11 +525,20 @@ if __name__=="__main__":
     root.title(config['ENTERPRISE_NAME'])
     root.resizable(width=0, height=0)
 
+    #i create 2 adittionals font types to my project
+
     font_title=Font(size=20)
     font_big=Font(size=10)
 
+    #I started the de database
+
     Data_base()
+
+    #app starts
+
     Aplication(master=root)
     
+    #its necesary to maintance the aplication detecting data
+
     root.mainloop()
     
