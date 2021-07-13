@@ -174,7 +174,7 @@ class Confirm_sell:
         self.root=Tk()
         self.root.geometry("250x130")
         self.root.resizable(height=0,width=0)
-        self.root.title("Productos")
+        self.root.title("Pago")
 
         self.main_frame=Frame(self.root)
         self.main_frame.pack()
