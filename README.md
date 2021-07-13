@@ -1,9 +1,8 @@
 # Project-Omega-II
 New inventary program
 
-========================================================================
-                        HUGO CAMPOS - CHILE
-========================================================================
+##                        HUGO CAMPOS - CHILE
+                        
 HI
 THIS PROGRAM IS FOR FREE USE
 ITS CONTINUE IN PROGRESS BUT IF YOU WANT YOU CAN USE IT OR DEBUG IT
