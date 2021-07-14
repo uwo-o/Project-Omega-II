@@ -296,14 +296,14 @@ class Confirm_sell:
 
 class Data_base:
     def __init__(self):
-        self.inventary=self.get_inventary()
-        self.product_data=[]
-        for x in self.inventary:
-            self.product_data.append(x[1])
+
+        #Connect or create data base
+
         conection=sqlite3.connect("database/DB")
         cursor = conection.cursor()
         try:
-            #If dont exist the DB its created
+            #If dont exist the table its created
+
             cursor.execute(
                 '''
                 CREATE TABLE INVENTARY (
@@ -317,12 +317,19 @@ class Data_base:
             conection.close()
         except:
             conection.close()
+        self.inventary=self.get_inventary()
+        self.product_data=[]
+        for x in self.inventary:
+            self.product_data.append(x[1])
 
     def sell(self,list):
         conection=sqlite3.connect("database/DB")
         cursor = conection.cursor()
         for x in list:
             try:
+
+                #Update selled items
+
                 quantity = cursor.execute("SELECT CANTIDAD FROM INVENTARY WHERE PRODUCTO='{}'".format(x)).fetchall()[0][0]
                 self.cursor=cursor.execute("UPDATE INVENTARY SET CANTIDAD='{}' WHERE PRODUCTO = '{}'".format(quantity-int(list[x]),x))
                 conection.commit()
@@ -334,6 +341,9 @@ class Data_base:
     def get_inventary(self):
         conection=sqlite3.connect("database/DB")
         cursor = conection.cursor()
+
+        #create a list with the elements of the inventary table
+        
         self.list=[]
         try:
             self.cursor=cursor.execute("SELECT * FROM INVENTARY")
@@ -348,6 +358,9 @@ class Data_base:
     def get_product(self,product):
         conection=sqlite3.connect("database/DB")
         cursor = conection.cursor()
+
+        #Obtain all data about at one product
+
         self.product_data=[]
         try:
             self.cursor=cursor.execute("SELECT * FROM INVENTARY WHERE PRODUCTO = '{}'".format(product))
@@ -364,6 +377,9 @@ class Data_base:
         cursor = conection.cursor()
         if data[0] in self.product_data:
             try:
+
+                #if value exist its updated
+
                 self.cursor=cursor.execute("UPDATE INVENTARY SET CANTIDAD='{}',PRECIO='{}' WHERE PRODUCTO = '{}'".format(data[1],data[2],data[0]))
                 conection.commit()
                 conection.close()
@@ -372,6 +388,9 @@ class Data_base:
                 messagebox.showerror("ERROR",e)
         else:
             try:
+
+                #if item no exist this is created
+
                 self.cursor=cursor.execute("INSERT INTO INVENTARY VALUES(NULL,'{}','{}','{}')".format(data[0],data[1],data[2]))
                 conection.commit()
                 conection.close()
@@ -383,6 +402,9 @@ class Data_base:
         conection=sqlite3.connect("database/DB")
         cursor = conection.cursor()
         try:
+
+            #just delete a item
+            
             self.cursor=cursor.execute("DELETE FROM INVENTARY WHERE ID = '{}'".format(id))
             conection.commit()
             conection.close()
@@ -393,8 +415,6 @@ class Data_base:
             messagebox.showerror("ERROR",e)
 
 class Edit_inventary:
-
-
     def __init__(self):
 
         self.products_var=StringVar()
@@ -415,7 +435,6 @@ class Edit_inventary:
 
         self.widgets()
         self.set_table()
-
 
     def Spacer(self,frame):
         return Label(frame,text="----------------------------------------------------------------------------------------------")
