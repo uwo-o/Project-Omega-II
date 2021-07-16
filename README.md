@@ -7,13 +7,13 @@ Hi, this program is for free use, it' still in progress but if you want you can 
 
 This is a new concept of that old program
 
-##THE PROGRAM LOOKS LIKE:
+## THE PROGRAM LOOKS LIKE:
 
 ![image](README/Screenshot_1.png)
 
 It's possible in a future i upgrade the interface and user experience
 
-##HOW CAN I TRY THIS PROGRAM?
+## HOW CAN I TRY THIS PROGRAM?
 
 Click here:
 
@@ -23,7 +23,7 @@ And then:
 
 ![image](README/Screenshot_3.png)
 
-##HOW TO CREATE A EXECUTABLE PROGRAM
+## HOW TO CREATE A EXECUTABLE PROGRAM
 
 In firs step install the package:
 
@@ -35,4 +35,4 @@ Then in the main PATH use:
 
 And then drag the "database" foldedr and "config.conf file into "dist" folder
 
-##THANKS FOR READ AND WATCH MY PROJECT
+## THANKS FOR READ AND WATCH MY PROJECT
