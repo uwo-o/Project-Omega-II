@@ -1,34 +1,32 @@
-#Project-Omega-II
+#Project Omega II
 New inventary program
 
 ##HUGO CAMPOS - CHILE
 
-HI, THIS PROGRAM IS FOR FREE USEITS CONTINUE IN PROGRESS BUT IF YOU WANT YOU CAN USE IT OR DEBUG IT ORIGINALY THIS PROGRAM WAS THINKED TO USE IN A NEW BEER ENTERPRISE (LIKE A STARTUP, THAT IS THE PRINCIPAL REASON FOR THE PROGRAM IS SO BASIC) BUT CAN BE USED FOR ANYTHING TYPE OF INVENTARY.
+Hi, this program is for free use, it' still in progress but if you want you can use it or debug it, originaly thhe first program version ("Project Omega I") was thinked to use in a new beer enterprise (like a startup), that is the principal reason for the program is basic) but can be used for anything type of inventary
 
-THIS IS A NEW CONCEPT OF A OLD SAME PROGRAM
+This is a new concept of that old program
 
 ##THE PROGRAM LOOKS LIKE:
 
 ![image](README/Screenshot_1.png)
 
-IT'S POSSIBLE IN AN FUTURE I UPGRADE THE INTERFACE AND USER EXPERIENCE
+It's possible in a future i upgrade the interface and user experience
 
 ##HOW CAN I TRY THIS PROGRAM?
 
-CLICK HERE:
+Click here:
 
 ![image](README/Screenshot_2.png)
 
-AND THEN:
+And then:
 
 ![image](README/Screenshot_3.png)
 
 ##HOW TO CREATE A EXECUTABLE PROGRAM
 
-IN THE MAIN PATH USE
+In the main PATH use: ```pyinstaller --windowed --onefile main.py```
 
-```pyinstaller --windowed --onefile main.py```
-
-AND THEN DRAG THE "database" folder and "config.conf" file into "dist" folder
+And then drag the "database" foldedr and "config.conf file into "dist" folder
 
 ##THANKS FOR READ AND WATCH MY PROJECT
