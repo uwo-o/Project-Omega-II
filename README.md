@@ -25,7 +25,13 @@ And then:
 
 ##HOW TO CREATE A EXECUTABLE PROGRAM
 
-In the main PATH use: ```pyinstaller --windowed --onefile main.py```
+In firs step install the package:
+
+```pip install pyinstaller```
+
+Then in the main PATH use:
+
+```pyinstaller --windowed --onefile main.py```
 
 And then drag the "database" foldedr and "config.conf file into "dist" folder
 
