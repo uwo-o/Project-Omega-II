@@ -40,6 +40,6 @@ Then in the main PATH use:
 
 ```pyinstaller --windowed --onefile main.py```
 
-And then drag the "database" folder and "config.conf file into "dist" folder
+And then drag the ```database``` folder and ```config.conf``` file into ```dist``` folder
 
 ### THANKS FOR READ AND WATCH MY PROJECT
