@@ -36,4 +36,4 @@ Then in the main PATH use:
 
 And then drag the "database" folder and "config.conf file into "dist" folder
 
-## THANKS FOR READ AND WATCH MY PROJECT
+### THANKS FOR READ AND WATCH MY PROJECT
