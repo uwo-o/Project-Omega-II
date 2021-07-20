@@ -2,6 +2,7 @@ from sqlite3.dbapi2 import connect
 from tkinter import Button, Entry, Listbox, StringVar, Tk, ttk, Frame, Label, messagebox
 from tkinter.constants import CENTER, DISABLED, END, NO
 from tkinter.font import Font
+from datetime import datetime
 import sqlite3
 import re
 
@@ -288,7 +289,7 @@ class Confirm_sell:
         #send a message with the cashback calculed, if the joined value is empty automatically is seted to total value
 
         messagebox.showinfo("VUELTO", "El vuelto es de: ${}.".format(int(self.pay_entry.get())-int(self.cost)))
-        Data_base().sell(self.list)
+        Data_base().sell(self.list,self.cost)
 
         #destroy itself
 
@@ -302,15 +303,32 @@ class Data_base:
         conection=sqlite3.connect("database/DB")
         cursor = conection.cursor()
         try:
-            #If dont exist the table its created
+            #If dont exist the tables its created
 
             cursor.execute(
                 '''
-                CREATE TABLE INVENTARY (
+                CREATE TABLE INVENTARY(
                 ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 PRODUCTO VARCHAN(100) NOT NULL,
                 CANTIDAD INT NOT NULL,
                 PRECIO INT NOT NULL)
+                '''
+            )
+            conection.commit()
+            conection.close()
+        except:
+            conection.close()
+        conection=sqlite3.connect("database/DB")
+        cursor = conection.cursor()
+        try:
+            cursor.execute(
+                '''
+                CREATE TABLE SELLS(
+                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                PRODUCTO VARCHAN(100) NOT NULL,
+                CANTIDAD INT NOT NULL,
+                GANANCIA INT NOT NULL,
+                FECHA VARCHAN(100) NOT NULL)
                 '''
             )
             conection.commit()
@@ -322,7 +340,7 @@ class Data_base:
         for x in self.inventary:
             self.product_data.append(x[1])
 
-    def sell(self,list):
+    def sell(self,list,cost):
         conection=sqlite3.connect("database/DB")
         cursor = conection.cursor()
         for x in list:
@@ -332,6 +350,9 @@ class Data_base:
 
                 quantity = cursor.execute("SELECT CANTIDAD FROM INVENTARY WHERE PRODUCTO='{}'".format(x)).fetchall()[0][0]
                 self.cursor=cursor.execute("UPDATE INVENTARY SET CANTIDAD='{}' WHERE PRODUCTO = '{}'".format(quantity-int(list[x]),x))
+                conection.commit()
+                #Add the sell to the log
+                self.cursor=cursor.execute("INSERT INTO SELLS VALUES(NULL,'{}','{}','{}','{}')".format(x,list[x],cost,datetime.now()))
                 conection.commit()
                 conection.close()
             except Exception as e:

@@ -20,7 +20,13 @@ It's possible in a future i upgrade the interface and user experience.
 
 ## HOW CAN I TRY THIS PROGRAM?
 
+<<<<<<< HEAD
+
+
+CLICK HERE:
+=======
 Click here:
+>>>>>>> d616bbc31ab0a0dd32535089ca31e369b31682e3
 
 ![image](README/Screenshot_2.png)
 
