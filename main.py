@@ -3,6 +3,8 @@ from tkinter import Button, Entry, Listbox, StringVar, Tk, ttk, Frame, Label, me
 from tkinter.constants import CENTER, DISABLED, END, NO
 from tkinter.font import Font
 from datetime import datetime
+import pandas.io.sql as pd
+import xlwt
 import sqlite3
 import re
 
@@ -109,8 +111,9 @@ class Aplication:
         self.table.heading('Cantidad', text='Cantidad', anchor=CENTER)
         self.table.heading('Precio F.', text='Precio F.', anchor=CENTER)
 
-        self.refresh_button=Button(self.frame_buttons,text="Actualizar",command=self.update_products_list).grid(row=0,column=0,padx=5,pady=5)
-        self.products_button=Button(self.frame_buttons,text="Productos",command=lambda:Edit_inventary()).grid(row=1,column=0,padx=5)
+        self.refresh_button=Button(self.frame_buttons,text="Actualizar",width="20",command=self.update_products_list).grid(row=0,column=0,padx=5,pady=5)
+        self.products_button=Button(self.frame_buttons,text="Productos",width="20",command=lambda:Edit_inventary()).grid(row=1,column=0,padx=5)
+        self.products_button=Button(self.frame_buttons,text="Exportar Registro",width="20",command=lambda:Data_base().To_excel()).grid(row=2,column=0,padx=5,pady=5)
 
         self.cancel_button=Button(root,width=25,height=5,text="Cancelar",command=self.cancel).place(relx=.4,rely=.85)
         self.sell_button=Button(root,width=25,height=5,text="Generar Venta",command=self.create_sell).place(relx=.7,rely=.85)
@@ -435,6 +438,12 @@ class Data_base:
             conection.close()
             messagebox.showerror("ERROR",e)
 
+    def To_excel(self):
+        conection=sqlite3.connect("database/DB")
+        data=pd.read_sql("SELECT * FROM SELLS", conection)
+        data.to_excel("ventas.xlsx")
+
+        
 class Edit_inventary:
     def __init__(self):
 
