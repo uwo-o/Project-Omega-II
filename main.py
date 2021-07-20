@@ -351,6 +351,7 @@ class Data_base:
                 quantity = cursor.execute("SELECT CANTIDAD FROM INVENTARY WHERE PRODUCTO='{}'".format(x)).fetchall()[0][0]
                 self.cursor=cursor.execute("UPDATE INVENTARY SET CANTIDAD='{}' WHERE PRODUCTO = '{}'".format(quantity-int(list[x]),x))
                 conection.commit()
+                #Add the sell to the log
                 self.cursor=cursor.execute("INSERT INTO SELLS VALUES(NULL,'{}','{}','{}','{}')".format(x,list[x],cost,datetime.now()))
                 conection.commit()
                 conection.close()
