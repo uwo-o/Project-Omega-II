@@ -440,8 +440,12 @@ class Data_base:
 
     def To_excel(self):
         conection=sqlite3.connect("database/DB")
-        data=pd.read_sql("SELECT * FROM SELLS", conection)
-        data.to_excel("ventas.xlsx")
+        try:
+            data=pd.read_sql("SELECT * FROM SELLS", conection)
+            data.to_excel("ventas.xlsx")
+            messagebox.showinfo("Datos Exportados","El registro de ventas ha sido exportado exitosamente.")
+        except Exception as e:
+            messagebox.showerror("ERROR",e)
 
         
 class Edit_inventary:
