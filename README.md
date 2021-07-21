@@ -25,12 +25,6 @@ It's possible in a future i upgrade the interface and user experience.
 
 
 CLICK HERE:
-=======
-Click here:
->>>>>>> d616bbc31ab0a0dd32535089ca31e369b31682e3
-=======
-Click here:
->>>>>>> af140871af18556010e5ffed826f985b480ddb1e
 
 ![image](README/Screenshot_2.png)
 
@@ -40,11 +34,8 @@ And then:
 
 ----
 
-<<<<<<< HEAD
+
 ## HOW TO CREATE A EXECUTABLE PROGRAM?
-=======
-## HOW TO CREATE AN EXECUTABLE PROGRAM?
->>>>>>> af140871af18556010e5ffed826f985b480ddb1e
 
 In firs step install the package:
 
