@@ -30,7 +30,7 @@ And then:
 
 ----
 
-## HOW TO CREATE A EXECUTABLE PROGRAM?
+## HOW TO CREATE AN EXECUTABLE PROGRAM?
 
 In firs step install the package:
 
