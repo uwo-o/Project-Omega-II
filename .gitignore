@@ -130,6 +130,7 @@ dmypy.json
 database/DB
 ventas.xlsx
 database/DB
+<<<<<<< HEAD
 Scripts/activate
 Scripts/activate_this.py
 Scripts/activate.bat
@@ -149,3 +150,5 @@ Scripts/wheel.exe
 Scripts/wheel3.9.exe
 Scripts/wheel3.exe
 pyvenv.cfg
+=======
+>>>>>>> af140871af18556010e5ffed826f985b480ddb1e
