@@ -593,3 +593,4 @@ if __name__=="__main__":
     #its necesary to maintance the aplication detecting data
 
     root.mainloop()
+    
