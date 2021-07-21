@@ -446,12 +446,7 @@ class Data_base:
             messagebox.showinfo("Datos Exportados","El registro de ventas ha sido exportado exitosamente.")
         except Exception as e:
             messagebox.showerror("ERROR",e)
-<<<<<<< HEAD
        
-=======
-
-        
->>>>>>> af140871af18556010e5ffed826f985b480ddb1e
 class Edit_inventary:
     def __init__(self):
 
