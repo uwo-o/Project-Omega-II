@@ -20,9 +20,6 @@ It's possible in a future i upgrade the interface and user experience.
 
 ## HOW CAN I TRY THIS PROGRAM?
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 
 CLICK HERE:
 
